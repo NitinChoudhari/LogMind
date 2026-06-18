@@ -4,6 +4,14 @@
 
 A ground-up rebuild of the original `rag-system`: a clean crewAI agent pipeline, a proper one-time ingestion step, hybrid retrieval done right, real citations, and an eval harness.
 
+## ✨ Demo
+
+### Empty State
+<img width="2185" height="828" alt="Logmind screenshot_1" src="https://github.com/user-attachments/assets/06960202-c2f9-4b43-8993-4c59efb05890" />
+
+### Example Query
+<img width="2167" height="1244" alt="Logmind screenshot_2" src="https://github.com/user-attachments/assets/847bf7c1-bf0c-454d-a755-e0805c07010d" />
+
 ---
 
 ## Architecture
