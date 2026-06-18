@@ -10,7 +10,8 @@ A ground-up rebuild of the original `rag-system`: a clean crewAI agent pipeline,
 <img width="2185" height="828" alt="Logmind screenshot_1" src="https://github.com/user-attachments/assets/06960202-c2f9-4b43-8993-4c59efb05890" />
 
 ### Example Query
-<img width="2167" height="1244" alt="Logmind screenshot_2" src="https://github.com/user-attachments/assets/847bf7c1-bf0c-454d-a755-e0805c07010d" />
+<img width="2523" height="1267" alt="Logmind screenshot_4" src="https://github.com/user-attachments/assets/4866397e-34dc-4c33-b999-ef2ca675c96d" />
+
 
 ---
 
