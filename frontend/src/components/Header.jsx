@@ -2,7 +2,7 @@ export default function Header({ health, docs }) {
   return (
     <header className="header">
       <div className="brand">
-        <span className="brand__mark">log<span className="brand__accent">mind</span></span>
+        <span className="brand__mark">LOG<span className="brand__accent">MIND</span></span>
         {/* <span className="brand__sub">ask your documents</span> */}
       </div>
       <div className="status">
@@ -10,7 +10,7 @@ export default function Header({ health, docs }) {
           <span className="pill" title="Set by PROVIDER in the backend .env">
             <span className="pill__dot" />
             {health.provider} · {health.model}
-            {health.reranker && health.reranker !== "none" && ` · rerank: ${health.reranker}`}
+            {/* {health.reranker && health.reranker !== "none" && ` · rerank: ${health.reranker}`} */}
           </span>
         )}
         {docs && docs.index_ready ? (

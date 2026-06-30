@@ -4,7 +4,9 @@ export default function AnswerCard({ answer, onCite, streaming }) {
   const parts = String(answer).split(/(\[\d+\])/g);
   return (
     <div className="answer">
-      <span className="answer__label">answer{streaming ? " · streaming" : ""}</span>
+      <span className={"answer__label" + (streaming ? " answer__label--streaming" : "")}>
+        LogMind{streaming ? " is answering…" : ""}
+      </span>
       <div className="answer__body">
         {parts.map((part, i) => {
           const m = part.match(/^\[(\d+)\]$/);

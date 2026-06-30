@@ -1,12 +1,14 @@
 # secrets
 .env
 *.env
+.gitignore
 
 # python
 __pycache__/
 *.pyc
 backend/venv/
 backend/db/
+changelog
 
 # data
 backend/data/
@@ -14,3 +16,21 @@ backend/data/
 # node / build
 frontend/node_modules/
 frontend/dist/
+
+.env
+
+*.db
+
+__pycache__/
+
+.venv/
+
+models/
+
+qdrant/
+
+storage/
+
+logs/
+
+cache/

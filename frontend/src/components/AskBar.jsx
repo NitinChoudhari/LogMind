@@ -5,23 +5,29 @@ export default function AskBar({ onAsk, loading }) {
 
   function submit() {
     const trimmed = q.trim();
-    if (trimmed.length >= 3 && !loading) onAsk(trimmed);
+    if (trimmed.length >= 3 && !loading) {
+      onAsk(trimmed);
+      setQ("");
+    }
   }
 
   return (
     <div className="askbar">
-      <span className="askbar__prompt">›</span>
       <input
         className="askbar__input"
         value={q}
         onChange={(e) => setQ(e.target.value)}
         onKeyDown={(e) => e.key === "Enter" && submit()}
-        placeholder="Ask about the indexed manuals, error codes, or policies…"
+        placeholder="Ask about your tax knowledge base…"
         autoFocus
       />
-      <button className="askbar__btn" onClick={submit} disabled={loading}>
-        {loading ? "Working…" : "Ask"}
-      </button>
+      <button
+        className="askbar__btn"
+        onClick={submit}
+        disabled={loading}
+        title={loading ? "Working…" : "Ask"}
+        aria-label={loading ? "Working…" : "Ask"}
+      />
     </div>
   );
 }

@@ -3,13 +3,28 @@ uvicorn[standard]>=0.30
 crewai>=0.80
 langchain>=0.3
 langchain-openai>=0.2
-langchain-ollama>=0.2
-langchain-chroma>=0.1
+langchain-huggingface>=0.1
 langchain-community>=0.3
 langchain-text-splitters>=0.3
-chromadb>=0.5
-rank-bm25>=0.2.2
+qdrant-client>=1.18
+fastembed>=0.8
+tavily-python>=0.7
 pypdf>=4.0
-flashrank>=0.2.9
 python-dotenv>=1.0
 pydantic>=2.0
+tiktoken>=0.7
+pyyaml>=6.0
+requests>=2.31
+
+# PROVIDER=huggingface (local transformers, no server). Install torch with the
+# CUDA wheel BEFORE this file, e.g.:
+#   pip install torch --index-url https://download.pytorch.org/whl/cu128
+# Plain `pip install -r requirements.txt` alone will pull CPU-only torch on Windows.
+transformers>=4.51
+accelerate>=0.34
+bitsandbytes>=0.43
+sentence-transformers>=3.0
+
+# ROUTER_PROVIDER=zeroshot (e.g. deberta-v3-large-zeroshot-v2.0) - DeBERTa-v2/v3's
+# tokenizer is SentencePiece-based and requires this package to load.
+sentencepiece>=0.2

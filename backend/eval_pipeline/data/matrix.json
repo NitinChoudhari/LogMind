@@ -1,0 +1,5 @@
+[
+  { "label": "ms-marco", "llm_model": "gpt-4o-mini", "reranker_model": "ms-marco-minilm-l6-v2" },
+  { "label": "bge", "llm_model": "gpt-4o-mini", "reranker_model": "bge-reranker-v2-m3" },
+  { "label": "no-rerank", "llm_model": "gpt-4o-mini", "reranker_model": "none" }
+]

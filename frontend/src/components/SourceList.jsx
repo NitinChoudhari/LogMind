@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export default function SourceList({ sources, active }) {
-  const [open, setOpen] = useState(false); // start open so citation clicks can scroll to a source
+export default function SourceList({ sources, active, turnId }) {
+  const [open, setOpen] = useState(false); // open by default so citation clicks always have a target to scroll to
   if (!sources || !sources.length) return null;
   return (
     <div className="sources">
@@ -14,7 +14,7 @@ export default function SourceList({ sources, active }) {
         sources.map((s) => (
           <div
             key={s.n}
-            id={`src-${s.n}`}
+            id={`src-${turnId}-${s.n}`}
             className={"source" + (active === s.n ? " source--active" : "")}
           >
             <div className="source__head">

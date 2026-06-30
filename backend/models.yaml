@@ -1,0 +1,127 @@
+# LogMind model registry.
+#
+# Answers exactly one question per entry: "how do I locate and load this
+# model?" Nothing about runtime behavior (token limits, rerank thresholds,
+# rerank pool size, etc.) belongs here - those stay in .env. See
+# config.py's _load_registry()/_resolve() for how this is consumed, and
+# CLAUDE.md's "Switching providers" section for the full picture.
+#
+# Fields:
+#   role          - llm | embedding | reranker | router (the role this model
+#                   plays in the pipeline; open to future roles, e.g. planner/
+#                   critic/summarizer, without changing this shape)
+#   provider      - who serves it: openai | lmstudio | huggingface |
+#                   sentence-transformers
+#   loader        - how it's loaded/called. Two models can share a provider
+#                   but need different loaders (e.g. bge-reranker-v2-m3 and
+#                   qwen3-reranker-4b are both sentence-transformers but
+#                   qwen3 needs trust_remote_code + chat-template scoring).
+#   identifier    - the literal value passed to that loader: an OpenAI model
+#                   name, an LM Studio Developer-tab identifier, an HF repo
+#                   id, or a local directory path. NOT always a filesystem
+#                   path, despite the name "model" suggesting one.
+#   display_name  - optional, UI/logging only.
+#   enabled/tags   - optional, currently unused by any application code;
+#                   forward-compat hooks for later UI/diagnostics/benchmark
+#                   filtering. The loader tolerates them without validating
+#                   their content.
+#
+# RERANKER_MODEL=none in .env is a reserved literal (skip reranking
+# entirely) - it is NOT looked up here, there is no "none" entry.
+
+# --- LLM (role: llm, loader: chat) -------------------------------------------
+gpt-oss-20b:
+  role: llm
+  provider: lmstudio
+  loader: chat
+  identifier: gpt-oss-20b   # confirmed via GET /v1/models on the running LM Studio server
+  display_name: GPT-OSS 20B
+
+qwen3vl-8b-instruct:
+  role: llm
+  provider: lmstudio
+  loader: chat
+  identifier: qwen3vl-8b-instruct   # confirmed via GET /v1/models on the running LM Studio server
+  display_name: Qwen3VL 8B Instruct
+
+meta-llama-3.1-8b-instruct:
+  role: llm
+  provider: lmstudio
+  loader: chat
+  identifier: meta-llama-3.1-8b-instruct   # confirmed via GET /v1/models on the running LM Studio server
+
+gpt-4o-mini:
+  role: llm
+  provider: openai
+  loader: chat
+  identifier: gpt-4o-mini
+
+qwen3-4b-instruct-hf:
+  role: llm
+  provider: huggingface
+  loader: chat
+  identifier: G:\Project\AI\Workspace\HuggingFace\Models\Qwen3-4B-Instruct-2507
+  display_name: Qwen3 4B Instruct (local transformers)
+
+# --- Embeddings (role: embedding, loader: embedding) -------------------------
+qwen3-embedding-0.6b:
+  role: embedding
+  provider: sentence-transformers
+  loader: embedding
+  identifier: F:/Models/lmstudio-community/Embedding/Qwen3-Embedding-0.6B
+  display_name: Qwen3 Embedding 0.6B
+
+qwen3-embedding-4b:
+  role: embedding
+  provider: sentence-transformers
+  loader: embedding
+  identifier: F:/Models/lmstudio-community/Embedding/Qwen3-Embedding-4B
+  display_name: Qwen3 Embedding 4B
+
+bge-small-en-v1.5:
+  role: embedding
+  provider: huggingface
+  loader: embedding
+  identifier: BAAI/bge-small-en-v1.5
+
+# --- Reranker (role: reranker) ------------------------------------------------
+bge-reranker-v2-m3:
+  role: reranker
+  provider: sentence-transformers
+  loader: cross-encoder
+  identifier: F:\Models\lmstudio-community\Reranker\bge-reranker-v2-m3
+
+ms-marco-minilm-l6-v2:
+  role: reranker
+  provider: sentence-transformers
+  loader: cross-encoder   # plain sequence-classification cross-encoder, same shape as bge-reranker-v2-m3
+  identifier: F:\Project\AI\Workspace\HuggingFace\Models\ms-marco-MiniLM-L6-v2
+  display_name: MS MARCO MiniLM L6 v2
+
+# --- Router (role: router, loader: chat | zeroshot) --------------------------
+deberta-v3-large-zeroshot:
+  role: router
+  provider: huggingface
+  loader: zeroshot
+  identifier: F:\Project\AI\Workspace\HuggingFace\Models\Intent Classifier Models\deberta-v3-large-zeroshot-v2.0
+  display_name: DeBERTa v3 Zero-Shot Router
+
+deberta-v3-base-zeroshot:
+  role: router
+  provider: huggingface
+  loader: zeroshot
+  identifier: F:\Project\AI\Workspace\HuggingFace\Models\Intent Classifier Models\deberta-v3-base-zeroshot-v2.0
+  display_name: DeBERTa v3 Base Zero-Shot Router
+
+qwen3-4b-instruct-router-hf:
+  role: router
+  provider: huggingface
+  loader: chat
+  identifier: Qwen/Qwen3-4B-Instruct-2507
+  display_name: Qwen3 4B Instruct (router, local transformers)
+
+gpt-4o-mini-router:
+  role: router
+  provider: openai
+  loader: chat
+  identifier: gpt-4o-mini
